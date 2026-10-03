@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#main {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#header h1 {
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+input[type="text"], input[type="email"], select, textarea {
+    width: 70%;
+    border: 2px solid black;
+    border-radius: .25rem;
+    padding: 0.75rem;
+}
+
+legend {
+    color: darkgreen;
+    font-weight: 300;
+    padding-bottom: .25rem;
+}
