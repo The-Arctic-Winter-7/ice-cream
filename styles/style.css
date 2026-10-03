@@ -17,6 +17,12 @@ body {
     border-radius: 1rem;
 }
 
+#main img {
+    position: fixed;
+    right: 50px;
+    top: 75px;
+}
+
 #header h1 {
     font-weight: 400;
     font-size: 2rem;
