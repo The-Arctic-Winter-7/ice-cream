@@ -23,6 +23,18 @@ body {
     text-align: center;
 }
 
+#order-button {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.25rem;
+    font-size: 1.25rem;
+    background-color: rgb(23, 216, 23);
+    border-radius: .50rem;
+    border: none;
+    color: white;
+}
+
 input[type="text"], input[type="email"], select, textarea {
     width: 100%;
     border: 2px solid black;
@@ -30,25 +42,29 @@ input[type="text"], input[type="email"], select, textarea {
     padding: 0.75rem;
 }
 
-
-
 legend {
     color: rgb(23, 216, 23);
     font-weight: 600;
-    padding: 0 1rem .25rem 1rem;
+    padding: 0 1rem 0 1rem;
     text-align: center;
     
 }
 
-label[for="name"], label[for="email"], label[for="comment"], label[for="flavor"], label[for="cone"], label[for="topping"] {
+label[for="name"], label[for="email"], label[for="comments"], label[for="flavor"], label[for="cone"], label[for="topping"] {
     display: block;
     margin-top: 1rem;
     margin-bottom: .75rem;
 }
 
+textarea {
+    border-radius: .50rem;
+    resize: vertical;
+}
+
 
 fieldset {
     border: 1px solid black;
+    border-radius: .50rem;
     padding: 1rem;
     margin-bottom: 1.25rem;
 }

@@ -36,8 +36,8 @@
                 <select type="select" id="flavor" name="flavor">
                     <option value="none">Select your Flavor</option>
                     <option value="vanilla"> Vanilla </option>
-                    <option value="strawberry"> strawberry </option>
-                    <option value="chocolate"> chocolate </option>
+                    <option value="strawberry"> Strawberry </option>
+                    <option value="chocolate"> Chocolate </option>
                 </select>
 
                 <!-- Cone Type -->
@@ -73,11 +73,14 @@
                 </label>
                 <label for="whip-cream">
                     <input type="checkbox" id="whip-cream" name="toppings[]" value="whip-cream">
-                    Whip-cream
+                    Whipped cream
                 </label>
+
+                <!-- Customer Message -->
+                <label for="comments">Additional Comments:</label>
+                <textarea rows="5" id="comments" name="comments"></textarea>
+
             </fieldset>
-            <label for="comments">Additional Comments</label>
-            <textarea rows="5" id="comments" name="comments"></textarea>
 
             <button type="submit" id="order-button">Submit Order</button>
         </form>
