@@ -7,6 +7,9 @@ const app = express();
 // Define the port number where our server will listen
 const PORT = 3001;
 
+// Create an array to store orders
+const orders = [];
+
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
@@ -18,9 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // req: contains information about the incoming request
 // res: allows us to send back a response to the client
 app.get('/', (req, res) => {
-
     res.render('home');
-
 });
 
 // Start the server and listen on the specified port
