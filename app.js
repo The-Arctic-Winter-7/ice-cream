@@ -10,13 +10,17 @@ const PORT = 3001;
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
+app.set('view engine', 'ejs');
+
+app.use(express.urlencoded({ extended: true }));
+
 // Define a default "route" ('/')
 // req: contains information about the incoming request
 // res: allows us to send back a response to the client
 app.get('/', (req, res) => {
 
     res.render('home');
-    
+
 });
 
 // Start the server and listen on the specified port
