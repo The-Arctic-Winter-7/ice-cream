@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <h1>Orders </h1>
+    <table id="order-table" class="display"> 
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Flavor</th>
+            <th>Method</th>
+            <th>Toppings</th>
+            <th>Comments</th>
+            <th>Date/Time</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% orders.forEach(order => { %>
+        <tr>
+          <td> <%= order.name %></td>
+          <td> <%= order.email %></td>
+          <td> <%= order.flavor %> </td>
+          <td> <%= order.method %> </td>
+          <td> <%= order.comments %> </td>
+          <td> <%= order.timestamp.toLocaleString() %> </td>
+        </tr>
+    <% }); %> 
+    </tbody>
+    </table>
+    <script>
+        new DataTable('#order-table');
+    </script>
+</body>
+</html>
