@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirm Order</title>
-    <h1>Thank you for your order!</h1>
 </head>
+
 <body>
-    
+    <h1>Thank you for your order!</h1>
+    <h2>Order Summary</h2>
+    <p>Name: <%= order.name %>
+    </p>
+    <p>Email: <%= order.email %>
+    </p>
+    <p>Ice Cream Flavor: <%= order.flavor %>
+    </p>
+    <p>Ice Cream Cone: <%= order.method %>
+    </p>
+    <p>Toppings: <%= order.toppings %>
+    </p>
+    <p>Comments: <%= order.comments %>
+    </p>
+    <p>Date and Time: <%= order.timestamp.toLocaleString() %>
+    </p>
+    <a href="/">Make another order!</a>
 </body>
+
 </html>
