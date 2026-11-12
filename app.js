@@ -38,6 +38,19 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+//DATABASE test route (for debugging)
+app.get('/db-test',async (req,res)=>{
+    try{
+       //[orders] uses array destruturing to get just the data
+        const [orders] = await pool.query('SELECT * FROM orders');
+        res.send(orders);
+
+    }catch(err){
+        console.error('Database error:', err);
+        res.status(500).send('Database error: '+ err.message);
+    }
+});
+
 app.post('/submit-order',(req,res)=> {
     const order = req.body;
     order.timestamp = new Date();
