@@ -1,6 +1,12 @@
 // Import the express module
 import express from 'express';
 
+import mysql2 from 'mysql2';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 // Create an instance of an Express application
 const app = express();
 
