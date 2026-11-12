@@ -65,8 +65,18 @@ app.post('/submit-order',(req,res)=> {
     res.render('confirm', {order});
 });
 
-app.get('/admin', (req, res) => {
-    res.render('admin', { orders });
+app.get('/admin',async (req, res) => {
+    try{
+        //[orders] uses array destruturing to get just the data
+         const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC ');
+        
+        res.render('admin', { orders });
+     }catch(err){
+        
+         console.error('Database error:', err);
+         res.status(500).send('Database error: '+ err.message);
+     }
+   
 });
 
 // Start the server and listen on the specified port
