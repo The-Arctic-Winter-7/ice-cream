@@ -40,6 +40,22 @@ app.get('/', (req, res) => {
 
 //Confirmation route - handles form submission
 app.post('/confirm', async(req,res) => {
+});
+
+/*DATABASE test route (for debugging)
+app.get('/db-test',async (req,res)=>{
+    try{
+       //[orders] uses array destruturing to get just the data
+        const [orders] = await pool.query('SELECT * FROM orders');
+        res.send(orders);
+
+    }catch(err){
+        console.error('Database error:', err);
+        res.status(500).send('Database error: '+ err.message);
+    }
+}); */
+
+app.post('/submit-order', async (req,res)=> {
     try {
         //Get form data from req.body
         const order = req.body;
@@ -56,12 +72,12 @@ app.post('/confirm', async(req,res) => {
         // Parameters array must match the order of ? placeholders
         // Make sure your property names match your order names
         const params = [
-        order.customer,
+        order.name,
         order.email,
         order.flavor,
-        order.cone,
+        order.method,
         order.toppings,
-        order.comment
+        order.comments
         ];
 
         // Execute the query and grab the primary key of the new row
@@ -73,39 +89,14 @@ app.post('/confirm', async(req,res) => {
         console.log('Order saved with ID:', order.id);
 
         // Render confirmation page with the order data
-        res.render('confirmation', { order });        
-
+        res.render('confirm', { order });        
     } catch (err) {
         console.error('Error saving order:', err);
         res.status(500).send(`Sorry, there was an error processing your order. Please try again.`);
     }
-});
-
-//DATABASE test route (for debugging)
-app.get('/db-test',async (req,res)=>{
-    try{
-       //[orders] uses array destruturing to get just the data
-        const [orders] = await pool.query('SELECT * FROM orders');
-        res.send(orders);
-
-    }catch(err){
-        console.error('Database error:', err);
-        res.status(500).send('Database error: '+ err.message);
-    }
-});
-
-app.post('/submit-order',(req,res)=> {
-    const order = req.body;
-    order.timestamp = new Date();
-    console.log(order);
-
-    //Add order object to orders array
-    orders.push(order);
-    console.log(order);
-    console.log(orders);
 
     //Display the confirmation page
-    res.render('confirm', {order});
+    res.render('confirm', { orders });
 });
 
 app.get('/admin',async (req, res) => {
