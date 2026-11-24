@@ -45,6 +45,14 @@ app.get('/session-test', (req, res) => {
         Logged in:${req.session.loggedIn === true} `);
 });
 
+function requireLogin(req, res, next) {
+    if (req.session.loggedIn) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
 // Define a default "route" ('/')
 // req: contains information about the incoming request
 // res: allows us to send back a response to the client
