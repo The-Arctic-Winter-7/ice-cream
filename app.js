@@ -5,6 +5,8 @@ import mysql2 from 'mysql2';
 
 import dotenv from 'dotenv';
 
+import session from 'express-session';
+
 dotenv.config();
 
 const pool = mysql2.createPool({
@@ -30,6 +32,18 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maaxAge:1000 * 60 * 60} // 1 hour
+}));
+//Temporary: session tesy route (remove in part 4)
+app.get('/session-test', (req, res) => {
+    req.session.views = (req.session.views || 0) + 1;
+    res.send(`Vists: ${req.session.views}<br>
+        Logged in:${req.session.loggedIn === true} `);
+});
 
 // Define a default "route" ('/')
 // req: contains information about the incoming request
