@@ -36,7 +36,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maaxAge:1000 * 60 * 60} // 1 hour
+    cookie: { maaxAge: 1000 * 60 * 60 } // 1 hour
 }));
 //Temporary: session tesy route (remove in part 4)
 app.get('/session-test', (req, res) => {
@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
 });
 
 //Confirmation route - handles form submission
-app.post('/confirm', async(req,res) => {
+app.post('/confirm', async (req, res) => {
 });
 
 /*DATABASE test route (for debugging)
@@ -77,7 +77,7 @@ app.get('/db-test',async (req,res)=>{
     }
 }); */
 
-app.post('/submit-order', async (req,res)=> {
+app.post('/submit-order', async (req, res) => {
     try {
         //Get form data from req.body
         const order = req.body;
@@ -86,7 +86,7 @@ app.post('/submit-order', async (req,res)=> {
 
         // Convert toppings array to comma-separated string 
         order.toppings = Array.isArray(order.toppings) ?
-            order.toppings.join(", ") : ""; 
+            order.toppings.join(", ") : "";
 
         // SQL INSERT query with placeholders to prevent SQL injection
         const sql = `INSERT INTO orders(customer, email, flavor, cone, toppings, comment) VALUES (?, ?, ?, ?, ?, ?);`;
@@ -94,12 +94,12 @@ app.post('/submit-order', async (req,res)=> {
         // Parameters array must match the order of ? placeholders
         // Make sure your property names match your order names
         const params = [
-        order.name,
-        order.email,
-        order.flavor,
-        order.method,
-        order.toppings,
-        order.comments
+            order.name,
+            order.email,
+            order.flavor,
+            order.method,
+            order.toppings,
+            order.comments
         ];
 
         // Execute the query and grab the primary key of the new row
@@ -111,7 +111,7 @@ app.post('/submit-order', async (req,res)=> {
         console.log('Order saved with ID:', order.id);
 
         // Render confirmation page with the order data
-        res.render('confirm', { order });        
+        res.render('confirm', { order });
     } catch (err) {
         console.error('Error saving order:', err);
         res.status(500).send(`Sorry, there was an error processing your order. Please try again.`);
@@ -121,19 +121,23 @@ app.post('/submit-order', async (req,res)=> {
     res.render('confirm', { orders });
 });
 
-app.get('/admin',async (req, res) => {
-    try{
+app.get('/login', (req, res) => {
+    res.render('login', { error: null });
+});
+
+app.get('/admin', async (req, res) => {
+    try {
         //Fetch all orders from databse, most recent first
-         const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC ');
-        
-         //render the admin page
+        const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC ');
+
+        //render the admin page
         res.render('admin', { orders });
-     }catch(err){
-        
-         console.error('Database error:', err);
-         res.status(500).send('Database error: '+ err.message);
-     }
-   
+    } catch (err) {
+
+        console.error('Database error:', err);
+        res.status(500).send('Database error: ' + err.message);
+    }
+
 });
 
 // Start the server and listen on the specified port
