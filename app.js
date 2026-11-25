@@ -129,19 +129,10 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     const username = req.body;
     const password = req.body;
-//Compare the form values to the values in .env
-if(username === process.env.ADMIN_USER &&
-    password === process.env.ADMIN_PASSWORD) {
+    //Compare the form values to the values in .env
+    if (username === process.env.ADMIN_USER &&
+        password === process.env.ADMIN_PASSWORD) {
         req.session.loggedIn = true;
-        res.redirect('/admin');
-    }else{
-        res.render('login', { error: 'Invalid username or password' });
-    }
-    
-
-
-    // Simple login logic (for demonstration purposes)
-    if (username === 'admin' && password === 'admin') {
         res.redirect('/admin');
     } else {
         res.render('login', { error: 'Invalid username or password' });
