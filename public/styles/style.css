@@ -29,19 +29,28 @@ body {
     text-align: center;
 }
 
-#order-button {
+.button {
     display: block;
+    text-decoration: none;
+    text-align: center;
     width: 100%;
     margin: 0 auto;
+    margin-top: 0.75rem;
     padding: 1.25rem;
     font-size: 1.25rem;
     background-color: rgb(23, 216, 23);
+    transition: background-color 0.2s ease;
     border-radius: .50rem;
     border: none;
     color: white;
 }
 
-input[type="text"], input[type="email"], select, textarea {
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(19, 144, 19);
+}
+
+input[type="text"], input[type="email"], input[type="password"], select, textarea {
     width: 100%;
     border: 2px solid black;
     border-radius: .25rem;
@@ -56,7 +65,7 @@ legend {
     
 }
 
-label[for="name"], label[for="email"], label[for="comments"], label[for="flavor"], label[id="cone"], label[id="topping"] {
+label[for="name"], label[for="email"], label[for="comments"], label[for="flavor"], label[id="cone"], label[id="topping"], label[for="username"], label[for="password"] {
     display: block;
     margin-top: 1rem;
     margin-bottom: .75rem;

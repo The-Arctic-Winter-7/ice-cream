@@ -12,36 +12,59 @@
   <script src="https://cdn.datatables.net/3.1.4/js/dataTables.min.js"></script>
   <link rel="Stylesheet" href="https://cdn.datatables.net/3.1.4/css/dataTables.dataTables.min.css">
 
+  <!-- Favicon -->
+  <link rel="icon" href="images/ice-cream-favicon.png">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/styles/style.css">
+
 </head>
 
 <body>
-  <h1>Orders </h1>
-  <table id="order-table" class="display">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Flavor</th>
-        <th>Method</th>
-        <th>Toppings</th>
-        <th>Comments</th>
-        <th>Date/Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% orders.forEach(order => { %>
-      <tr>
-        <td> <%= order.customer %></td>
-        <td> <%= order.email %></td>
-        <td> <%= order.flavor %> </td>
-        <td> <%= order.cone %> </td>
-        <td> <%= order.toppings %> </td>
-        <td> <%= order.comment %> </td>
-        <td> <%= order.timestamp.toLocaleString() %> </td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
+  <div id="main">
+    <h1>Orders </h1>
+    <table id="order-table" class="display">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Flavor</th>
+          <th>Method</th>
+          <th>Toppings</th>
+          <th>Comments</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(order=> { %>
+          <tr>
+            <td>
+              <%= order.customer %>
+            </td>
+            <td>
+              <%= order.email %>
+            </td>
+            <td>
+              <%= order.flavor %>
+            </td>
+            <td>
+              <%= order.cone %>
+            </td>
+            <td>
+              <%= order.toppings %>
+            </td>
+            <td>
+              <%= order.comment %>
+            </td>
+            <td>
+              <%= order.timestamp.toLocaleString() %>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+    <a href="/logout" class="button">Logout</a>
+  </div>
   <script>
     new DataTable('#order-table');
   </script>

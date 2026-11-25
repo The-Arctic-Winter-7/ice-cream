@@ -38,12 +38,6 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maaxAge: 1000 * 60 * 60 } // 1 hour
 }));
-//Temporary: session tesy route (remove in part 4)
-app.get('/session-test', (req, res) => {
-    req.session.views = (req.session.views || 0) + 1;
-    res.send(`Vists: ${req.session.views}<br>
-        Logged in:${req.session.loggedIn === true} `);
-});
 
 function requireLogin(req, res, next) {
     if (req.session.loggedIn) {
@@ -63,19 +57,6 @@ app.get('/', (req, res) => {
 //Confirmation route - handles form submission
 app.post('/confirm', async (req, res) => {
 });
-
-/*DATABASE test route (for debugging)
-app.get('/db-test',async (req,res)=>{
-    try{
-       //[orders] uses array destruturing to get just the data
-        const [orders] = await pool.query('SELECT * FROM orders');
-        res.send(orders);
-
-    }catch(err){
-        console.error('Database error:', err);
-        res.status(500).send('Database error: '+ err.message);
-    }
-}); */
 
 app.post('/submit-order', async (req, res) => {
     try {
@@ -127,8 +108,8 @@ app.get('/login', (req, res) => {
 
 //Process the login form
 app.post('/login', (req, res) => {
-    const username = req.body;
-    const password = req.body;
+    const username = req.body.username;
+    const password = req.body.password;
     //Compare the form values to the values in .env
     if (username === process.env.ADMIN_USER &&
         password === process.env.ADMIN_PASSWORD) {
@@ -139,7 +120,13 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/admin', async (req, res) => {
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+});
+
+app.get('/admin', requireLogin, async (req, res) => {
     try {
         //Fetch all orders from databse, most recent first
         const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC ');
